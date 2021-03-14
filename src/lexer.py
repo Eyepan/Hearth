@@ -8,7 +8,6 @@ class Lexer:
 		self._text = text
 		self._pos = -1
 		self._currentChar = None
-		self._tokensList = []
 		self.advance()
 
 	def advance(self):

@@ -44,6 +44,9 @@ class Lexer:
 			elif self._currentChar == ')':
 				tokens.append(Token(TT_RPAREN))
 				self.advance()
+			elif self._currentChar == '^':
+				tokens.append(Token(TT_EXP))
+				self.advance()
 
 
 			# SERIOUSLY BAD CODE, SHOULD REMOVE AFTER A PROPER EXIT FUNCTION IS PLACED

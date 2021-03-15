@@ -11,6 +11,10 @@ TT_DIV      = 'DIV'
 TT_LPAREN   = 'LPAREN'
 TT_RPAREN   = 'RPAREN'
 TT_EXP      = 'EXP'
+TT_LSQB     = 'LSQB'
+TT_RSQB     = 'RSQB'
+TT_LBRACE   = 'LBRACE'
+TT_RBRACE   = 'RBRACE'
 
 # Token Class
 class Token:

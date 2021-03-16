@@ -52,7 +52,7 @@ class Lexer:
 				self._tokens.append(Token(TT_RPAREN))
 				self.advance()
 
-			# super bad code ahead, don't do this anywhere else
+			# Super good code, I'm proud of it ;)
 
 			elif self._text == 'quit':
 				print("EXITING HEARTH")

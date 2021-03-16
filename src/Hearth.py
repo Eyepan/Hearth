@@ -1,6 +1,6 @@
-from Tokens import *
-from Lexer import *
-from Parser import *
+from tokens import *
+from lexer import *
+from parse import *
 
 class Hearth:
 	def __init__(self):

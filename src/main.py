@@ -1,7 +1,7 @@
 ################################################
 # HEARTH INITIALIZATION
 
-from hearth import *
+from Hearth import *
 
 def main():
 	hearthInstance = Hearth()

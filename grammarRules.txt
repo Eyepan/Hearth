@@ -1,0 +1,5 @@
+We have a list of tokens.
+
+factor		: (INT/FLOAT)
+term		: factor ((MUL/DIV) factor)*
+expression	: term ((PLUS/MINUS) term)*

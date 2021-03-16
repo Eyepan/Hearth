@@ -1,11 +1,11 @@
-# Importing all errors
-from errors import *
-from tokens import *
-# Lexer class 
+from Tokens import *
+
+# Lexer class
 
 class Lexer:
 	def __init__(self, text):
 		self._text = text
+		self._tokens = []
 		self._pos = -1
 		self._currentChar = None
 		self.advance()
@@ -18,72 +18,68 @@ class Lexer:
 			self._currentChar = None
 
 	def makeTokens(self):
-		tokens = []
-
 		while self._currentChar != None:
+
+			# checking for blank spaces and tabs
 			if self._currentChar in ' \t':
 				self.advance()
-			elif self._currentChar in DIGITS:
-				tokens.append(self.makeNumber())
+
+			# checking if the current token is a digit
+			if self._currentChar in DIGITS + '.':
+				self._tokens.append(self.makeNumber())
+
 			elif self._currentChar == '+':
-				tokens.append(Token(TT_PLUS))
+				self._tokens.append(Token(TT_PLUS))
 				self.advance()
+			
 			elif self._currentChar == '-':
-				tokens.append(Token(TT_MINUS))
+				self._tokens.append(Token(TT_MINUS))
 				self.advance()
+			
 			elif self._currentChar == '*':
-				tokens.append(Token(TT_MUL))
+				self._tokens.append(Token(TT_MUL))
 				self.advance()
+			
 			elif self._currentChar == '/':
-				tokens.append(Token(TT_DIV))
+				self._tokens.append(Token(TT_DIV))
 				self.advance()
+
 			elif self._currentChar == '(':
-				tokens.append(Token(TT_LPAREN))
+				self._tokens.append(Token(TT_LPAREN))
 				self.advance()
+
 			elif self._currentChar == ')':
-				tokens.append(Token(TT_RPAREN))
-				self.advance()
-			elif self._currentChar == '^':
-				tokens.append(Token(TT_EXP))
-				self.advance()
-			elif self._currentChar == '[':
-				tokens.append(Token(TT_LSQB))
-				self.advance()
-			elif self._currentChar == ']':
-				tokens.append(Token(TT_RSQB))
-				self.advance()
-			elif self._currentChar == '{':
-				tokens.append(Token(TT_LBRACE))
-				self.advance()
-			elif self._currentChar == '}':
-				tokens.append(Token(TT_RBRACE))
+				self._tokens.append(Token(TT_RPAREN))
 				self.advance()
 
+			# super bad code ahead, don't do this anywhere else
 
-			# SERIOUSLY BAD CODE, SHOULD REMOVE AFTER A PROPER EXIT FUNCTION IS PLACED
 			elif self._currentChar == 'x':
-				print("Exiting Hearth")
+				print("EXITING HEARTH")
 				exit()
-			else:
-				return [], IllegalCharacterError(f" '{self._currentChar}' ")
-		return tokens, None
-	
-	
-	def makeNumber(self):
-		number = ''
-		dotCount = 0
-		while self._currentChar != None and self._currentChar in DIGITS + '.':
-			if self._currentChar == '.':
-				if dotCount == 1: break
-				dotCount += 1
-				number += '.'
-			else:
-				number += self._currentChar
-			self.advance()
-		if dotCount == 0: return Token(TT_INT, int(number))
-		else: return Token(TT_FLOAT, float(number))
 
-def main(text):
-	lexer = Lexer(text)
-	tokens, errors = lexer.makeTokens()
-	return tokens, errors
+			else:
+				print(" " * (self._text.find(self._currentChar) + 9) + "^")
+				print(f"ILLEGAL CHARACTER {self._currentChar} in position {self._text.find(self._currentChar)}")
+				self._tokens.clear()
+				break
+		
+		return self._tokens
+
+
+	def makeNumber(self):
+		number = ''		# number as a string
+
+		# while the current character is still a digit or a decimal point, add the character to the number string
+		while self._currentChar != None and self._currentChar in DIGITS + '.':
+			number += self._currentChar
+			self.advance()
+
+		if '.' in number:
+			return Token(TT_FLOAT, float(number))
+		else:
+			return Token(TT_INT, int(number))
+
+	def getTokens(self):
+		return self.makeTokens()
+

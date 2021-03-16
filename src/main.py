@@ -1,8 +1,15 @@
-import lexer
+################################################
+# HEARTH INITIALIZATION
 
-# main loop
-while True:
-	text = input("hearth > ")
-	result, error = lexer.main(text)
-	if error: print("ERROR:", error.asString())
-	else: print(result)
+from Hearth import *
+
+def main():
+	hearthInstance = Hearth()
+	hearthInstance.mainLoop()
+
+
+
+
+# makes sure that the main function will run
+if __name__ == '__main__':
+	main()

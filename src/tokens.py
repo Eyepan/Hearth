@@ -1,28 +1,25 @@
-# CONSTANTS
-DIGITS = '1234567890'
+# All tokens inititalization
 
-# Tokens
-TT_INT		= 'INT'
-TT_FLOAT    = 'FLOAT'
-TT_PLUS     = 'PLUS'
-TT_MINUS    = 'MINUS'
-TT_MUL      = 'MUL'
-TT_DIV      = 'DIV'
-TT_LPAREN   = 'LPAREN'
-TT_RPAREN   = 'RPAREN'
-TT_EXP      = 'EXP'
-TT_LSQB     = 'LSQB'
-TT_RSQB     = 'RSQB'
-TT_LBRACE   = 'LBRACE'
-TT_RBRACE   = 'RBRACE'
+TT_INT 		= "INT"
+TT_FLOAT 	= "FLOAT"
+TT_PLUS 	= "PLUS"
+TT_MINUS 	= "MINUS"
+TT_MUL 		= "MUL"
+TT_DIV 		= "DIV"
+TT_LPAREN 	= "("
+TT_RPAREN 	= ")"
+DIGITS 		= "0123456789"
+TT_EOF 		= "EOF"
 
-# Token Class
+
+# Token class
 class Token:
-	def __init__(self, type, data = None):
+	def __init__(self, type, value = None):
 		self._type = type
-		self._data = data
-
+		self._value = value
+	
 	def __repr__(self):
-		if self._data: 
-			return f'{self._type}:{self._data}'
-		return f'{self._type}'
+		if self._value == None:
+			return f"{self._type}"
+		else:
+			return f"{self._type}:{self._value}"

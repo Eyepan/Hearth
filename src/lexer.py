@@ -54,7 +54,7 @@ class Lexer:
 
 			# super bad code ahead, don't do this anywhere else
 
-			elif self._currentChar == 'x':
+			elif self._text == 'quit':
 				print("EXITING HEARTH")
 				exit()
 

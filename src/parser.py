@@ -26,6 +26,7 @@ class Parser:
 			self._currentToken = self._tokens[self._tokenIndex]
 		else:
 			self._currentToken = Token(TT_EOF)
+			
 	def factor(self):
 		tok = self._currentToken
 		if tok._type in (TT_INT, TT_FLOAT):
